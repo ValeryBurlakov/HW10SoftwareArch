@@ -29,7 +29,7 @@ post:
 summary: Метод создания робота
 tags:
 - Robot
-operationId: cretateRobot
+operationId: createRobot
 requestBody:
 required: true
 content:
@@ -267,6 +267,30 @@ schema:
 $ref: '#/components/schemas/Schedule'
 '405':
 description: Invalid input
+/Schedule/getById/{robotId}:
+get:
+tags:
+- Schedule
+summary: Получить расписание по ID
+description: Получить расписание по указанному ID
+operationId: getSchedule
+parameters:
+- name: id
+in: path
+description: ID робота
+required: true
+schema:
+type: integer
+format: int64
+responses:
+'200':
+description: Успешный запрос
+content:
+application/json:
+schema:
+$ref: '#/components/schemas/Schedule'
+'400':
+description: Неверное значение расписания
 /Schedule/deleteById/{id}:
 delete:
 tags:
@@ -275,12 +299,6 @@ summary: удалить робота
 description: удаление робота
 operationId: deleteSchedule
 parameters:
-- name: id
-in: header
-description: ''
-required: false
-schema:
-type: string
 - name: id
 in: path
 description: ID робота
